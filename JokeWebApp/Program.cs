@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using JokeWebApp.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<JokeWebAppContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("JokeWebAppContext") ?? throw new InvalidOperationException("Connection string 'JokeWebAppContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
